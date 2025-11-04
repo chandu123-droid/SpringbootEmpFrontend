@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Automatically use Render backend if available, else use local backend
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+const API_URL = import.meta.env.VITE_API_URL
 
 // ✅ Get all employees
 export const getEmployees = () => axios.get(`${API_URL}/api/employees/showAllEmpdata`);
