@@ -58,7 +58,7 @@ const EmployeeList = () => {
     <>
       <Header />
       <div className="employee-list-container">
-	  
+	  <br/><br/>
         <h2>Employee Details</h2>
 		<table>
 		<tr>
