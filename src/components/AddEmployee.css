@@ -1,0 +1,110 @@
+/* Reset and background */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, goldenrod, #81ecec);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Center the entire form */
+.add-employee-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* The white card box */
+.add-employee-card {
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+/* Heading */
+.add-employee-card h2 {
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Input fields */
+.add-employee-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.add-employee-form input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+  outline: none;
+}
+
+/* Buttons section */
+.add-employee-btn,
+.cancel-btn {
+  width: 48%;
+  padding: 10px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-employee-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.add-employee-btn:hover {
+  background-color: #0056b3;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Make the buttons stay side-by-side neatly */
+.add-employee-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.add-employee-form button {
+  margin-top: 10px;
+}
+
+/* Responsive fix */
+@media (max-width: 600px) {
+  .add-employee-card {
+    width: 90%;
+    padding: 25px;
+  }
+
+  .add-employee-btn,
+  .cancel-btn {
+    width: 100%;
+  }
+}
