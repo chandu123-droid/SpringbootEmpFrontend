@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getEmployeeById, updateEmployee } from "../api";
 import Header from "./Header";
-import "./AddEmployee.css"; // Reuse same CSS as AddEmployee form
+import "./AddEmployee.css";
 
 const EditEmployee = () => {
   const { id } = useParams();
@@ -13,32 +13,32 @@ const EditEmployee = () => {
     firstname: "",
     lastname: "",
   });
+  const [loading, setLoading] = useState(true);
 
-  // ✅ Fetch existing employee data on mount
   useEffect(() => {
     const fetchEmployee = async () => {
       try {
         const response = await getEmployeeById(id);
-        setEmployee(response.data);
+        setEmployee(response.data || { emailid: "", firstname: "", lastname: "" });
       } catch (error) {
         console.error("❌ Error fetching employee data:", error);
         alert("Error fetching employee details.");
+      } finally {
+        setLoading(false);
       }
     };
     fetchEmployee();
   }, [id]);
 
-  // ✅ Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEmployee({ ...employee, [name]: value });
   };
 
-  // ✅ Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateEmployee(id, employee); // ✅ Correct way
+      await updateEmployee(id, employee);
       alert("✅ Employee updated successfully!");
       navigate("/");
     } catch (error) {
@@ -46,6 +46,8 @@ const EditEmployee = () => {
       alert("❌ Error updating employee. Check console for details.");
     }
   };
+
+  if (loading) return <p style={{ textAlign: "center" }}>Loading employee...</p>;
 
   return (
     <>
@@ -58,25 +60,23 @@ const EditEmployee = () => {
               type="email"
               name="emailid"
               placeholder="Enter Email ID"
-              value={employee.emailid}
+              value={employee.emailid || ""}
               onChange={handleChange}
               required
             />
-
             <input
               type="text"
               name="firstname"
               placeholder="Enter First Name"
-              value={employee.firstname}
+              value={employee.firstname || ""}
               onChange={handleChange}
               required
             />
-
             <input
               type="text"
               name="lastname"
               placeholder="Enter Last Name"
-              value={employee.lastname}
+              value={employee.lastname || ""}
               onChange={handleChange}
               required
             />

@@ -38,6 +38,155 @@
   font-size: 1rem;
   transition: 0.3s;
 }
+.employee-list-container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9fafb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.employee-list-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* 🔍 Search + Sort */
+.search-sort-container {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.sort-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.2s ease;
+}
+
+.sort-btn:hover {
+  background-color: #0056b3;
+}
+
+/* 🧾 Table */
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.employee-table th,
+.employee-table td {
+  border: 1px solid #ddd;
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.employee-table th {
+  background-color: #007bff;
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.employee-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.employee-table tr:hover {
+  background-color: #eaf4ff;
+}
+
+/* ✏️ Buttons */
+.edit-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: #218838;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+  .employee-list-container {
+    padding: 10px;
+  }
+
+  .employee-table th,
+  .employee-table td {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .sort-btn {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  .search-sort-container {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  /* Make table scrollable horizontally */
+  .employee-list-container {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 600px;
+  }
+}
+
+/* 📱 For very small screens */
+@media (max-width: 480px) {
+  .employee-list-container h2 {
+    font-size: 18px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+
+  .search-sort-container {
+    max-width: 100%;
+  }
+}
 
 .search-box:focus {
   border-color: #007bff;

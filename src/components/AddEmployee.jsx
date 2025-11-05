@@ -26,16 +26,13 @@ const AddEmployee = () => {
       navigate("/");
     } catch (error) {
       console.error("❌ Error adding employee:", error);
-      alert("❌ Error adding employee.");
+      alert("❌ Error adding employee. Check console for details.");
     }
   };
 
   return (
     <>
-      {/* ✅ Header at top */}
       <Header />
-
-      {/* ✅ Centered Add Employee Card */}
       <div className="add-employee-container">
         <div className="add-employee-card">
           <h2>Add New Employee</h2>
@@ -48,7 +45,6 @@ const AddEmployee = () => {
               onChange={handleChange}
               required
             />
-
             <input
               type="text"
               name="firstname"
@@ -57,7 +53,6 @@ const AddEmployee = () => {
               onChange={handleChange}
               required
             />
-
             <input
               type="text"
               name="lastname"

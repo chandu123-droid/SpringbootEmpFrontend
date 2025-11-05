@@ -17,9 +17,10 @@ const EmployeeList = () => {
   const loadEmployees = async () => {
     try {
       const res = await getEmployees();
-      setEmployees(res.data);
+      setEmployees(res.data || []);
     } catch (error) {
-      console.error("Error loading employees:", error);
+      console.error("❌ Error loading employees:", error);
+      alert("Failed to load employees. Check console for details.");
     }
   };
 
@@ -30,7 +31,7 @@ const EmployeeList = () => {
         alert(`✅ Employee ID ${id} deleted successfully!`);
         loadEmployees();
       } catch (error) {
-        console.error("Error deleting employee:", error);
+        console.error("❌ Error deleting employee:", error);
         alert("❌ Failed to delete employee.");
       }
     }
@@ -38,8 +39,8 @@ const EmployeeList = () => {
 
   const handleSort = () => {
     const sorted = [...employees].sort((a, b) => {
-      const nameA = a.firstname.toLowerCase();
-      const nameB = b.firstname.toLowerCase();
+      const nameA = (a.firstname || "").toLowerCase();
+      const nameB = (b.firstname || "").toLowerCase();
       return sortOrder === "asc"
         ? nameA.localeCompare(nameB)
         : nameB.localeCompare(nameA);
@@ -48,10 +49,10 @@ const EmployeeList = () => {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
-  const filteredEmployees = employees.filter(
-    (emp) =>
-      emp.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      emp.emailid.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredEmployees = employees.filter((emp) =>
+    [emp.firstname, emp.lastname, emp.emailid].some((field) =>
+      (field || "").toLowerCase().includes(searchTerm.toLowerCase())
+    )
   );
 
   return (
@@ -60,62 +61,68 @@ const EmployeeList = () => {
       <div className="employee-list-container">
 	  <br/><br/>
         <h2>Employee Details</h2>
-		<table>
-		<tr>
-		<td style={{paddingRight:"10px"}}>
-          <input className="search-sort-container"
+		
+		<div style={{display:"flex"}}>
+		<div style={{paddingRight:"400px"}}>
+          <input className="search-sort-container" 
             type="text"
             placeholder="🔍 Search by Name or Email..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)} size={"40"}/>
-         </td>
-		 
-		  <td>
+            onChange={(e) => setSearchTerm(e.target.value)}
+            size="40"
+           />
+		 </div>
+		  <div>
           <button className="sort-btn" onClick={handleSort}>
             Sort {sortOrder === "asc" ? "A → Z" : "Z → A"}
           </button>
-		</td>
-		<td style={{paddingLeft:"100px"}}></td>
-        </tr>
-		</table>
-          
-		<table className="employee-table">
-		<thead>
+		  </div>
+		</div>
 		
+         <br/>
+        <table className="employee-table">
+          <thead>
             <tr>
               <th>ID</th>
               <th>Email ID</th>
               <th>First Name</th>
               <th>Last Name</th>
-              <th>Modify</th>
-			  <th>Remove</th>
+              <th colSpan="2">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {filteredEmployees.map((emp) => (
-              <tr key={emp.id}>
-                <td>{emp.id}</td>
-                <td>{emp.emailid}</td>
-                <td>{emp.firstname}</td>
-                <td>{emp.lastname}</td>
-                <td>
-                  <button
-                    className="edit-btn"
-                    onClick={() => navigate(`/edit/${emp.id}`)}
-                  >
-                    Edit
-                  </button>
-				  </td>
-				  <td>
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleDelete(emp.id)}
-                  >
-                    Delete
-                  </button>
-				  </td>
+            {filteredEmployees.length > 0 ? (
+              filteredEmployees.map((emp) => (
+                <tr key={emp.id}>
+                  <td>{emp.id}</td>
+                  <td>{emp.emailid}</td>
+                  <td>{emp.firstname}</td>
+                  <td>{emp.lastname}</td>
+                  <td>
+                    <button
+                      className="edit-btn"
+                      onClick={() => navigate(`/edit/${emp.id}`)}
+                    >
+                      Edit
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDelete(emp.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" style={{ textAlign: "center" }}>
+                  No employees found.
+                </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

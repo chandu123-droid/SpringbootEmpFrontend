@@ -1,7 +1,8 @@
 import axios from "axios";
 
-// Automatically use Render backend if available, else use local backend
-const API_URL = "https://springbootempbackend-1.onrender.com"
+
+const API_URL = "https://springbootempbackend-1.onrender.com";
+
 
 // ✅ Get all employees
 export const getEmployees = () => axios.get(`${API_URL}/api/employees/showAllEmpdata`);
